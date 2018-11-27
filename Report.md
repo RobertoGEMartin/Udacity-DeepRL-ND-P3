@@ -1,5 +1,6 @@
-[image1]: https://user-images.githubusercontent.com/10624937/43851024-320ba930-9aff-11e8-8493-ee547c6af349.gif "Trained Agent"
-[image2]: https://user-images.githubusercontent.com/10624937/43851646-d899bf20-9b00-11e8-858c-29b5c2c94ccc.png "Crawler"
+[//]: # (Image References)
+[image1]: https://user-images.githubusercontent.com/10624937/42135623-e770e354-7d12-11e8-998d-29fc74429ca2.gif "Trained Agent"
+[image2]: https://user-images.githubusercontent.com/10624937/42135622-e55fb586-7d12-11e8-8a54-3c31da15a90a.gif "Soccer"
 
 # Report: "Project " - Collaboration and Competition - Multi-Agent RL"
 
@@ -32,57 +33,61 @@ We will train a system of DeepRL agents to demonstrate collaboration or cooperat
 
 ## Unity Environment
 
-+ Set-up: Double-jointed arm which can move to target locations.
-+ Goal: The agents must move it's hand to the goal location, and keep it there.
-+ Agents: The environment contains 20 agents linked to a single Brain.
++ Set-up: Two-player game where agents control rackets to bounce ball over a net.
++ Goal: The agents must bounce ball between one another while not dropping or sending ball out of bounds.
++ Agents: The environment contains two agent linked to a single Brain named TennisBrain. After training you can attach another Brain named MyBrain to one of the agent to play against your trained model.
 + Agent Reward Function (independent):
-  + 0.1 Each step agent's hand is in goal location.
+  + +0.1 To agent when hitting ball over net.
+  + -0.1 To agent who let ball hit their ground, or hit ball out of bounds.
 + Brains: One Brain with the following observation/action space.
-  + Vector Observation space: 33 variables corresponding to position, rotation, velocity, and angular velocities of the two arm Rigidbodies.
-  + Vector Action space: 
-      + Size of 4, corresponding to torque applicable to two joints.
-      + Continuous: Every entry in the action vector should be a number between -1 and 1.
+  + Vector Observation space: 8 variables corresponding to position and velocity of ball and racket.
+  + Vector Action space: (Continuous) Size of 2, corresponding to movement toward net or away from net, and jumping.
   + Visual Observations: None.
-+ Reset Parameters: Two, corresponding to goal size, and goal movement speed.
-+ Benchmark Mean Reward: 30
++ Reset Parameters: One, corresponding to size of ball.
++ Benchmark Mean Reward: 2.5
++ Optional Imitation Learning scene: TennisIL
 
 ![Trained Agent][image1]
 
-In this environment, a double-jointed arm can move to target locations. A reward of +0.1 is provided for each step that the agent's hand is in the goal location. Thus, the goal of your agent is to maintain its position at the target location for as many time steps as possible.
+In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1.  If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.  Thus, the goal of each agent is to keep the ball in play.
+
+The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. 
+
+The task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
+
+- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.
+- This yields a single **score** for each episode.
+
+The environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.
 
 
 ~~~~
+INFO:unityagents:
+'Academy' started successfully!
 Unity Academy name: Academy
         Number of Brains: 1
         Number of External Brains : 1
         Lesson number : 0
         Reset Parameters :
-         goal_speed -> 1.0
-         goal_size -> 5.0
-Unity brain name: ReacherBrain
+		
+Unity brain name: TennisBrain
         Number of Visual Observations (per agent): 0
         Vector Observation space type: continuous
-        Vector Observation space size (per agent): 33
-        Number of stacked Vector Observation: 1
+        Vector Observation space size (per agent): 8
+        Number of stacked Vector Observation: 3
         Vector Action space type: continuous
-        Vector Action space size (per agent): 4
-        Vector Action descriptions: , , ,
+        Vector Action space size (per agent): 2
+        Vector Action descriptions: , 
 ~~~~
 
 ~~~~
-Number of agents: 20
-Size of each action: 4
-There are 20 agents. Each observes a state with length: 33
-The state for the first agent looks like: 
-[ 0.00000000e+00 -4.00000000e+00  0.00000000e+00  1.00000000e+00
- -0.00000000e+00 -0.00000000e+00 -4.37113883e-08  0.00000000e+00
-  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
-  0.00000000e+00  0.00000000e+00 -1.00000000e+01  0.00000000e+00
-  1.00000000e+00 -0.00000000e+00 -0.00000000e+00 -4.37113883e-08
-  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
-  0.00000000e+00  0.00000000e+00  5.75471878e+00 -1.00000000e+00
-  5.55726624e+00  0.00000000e+00  1.00000000e+00  0.00000000e+00
- -1.68164849e-01]
+Number of agents: 2
+Size of each action: 2
+There are 2 agents. Each observes a state with length: 24
+The state for the first agent looks like: [ 0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.          0.          0.
+  0.          0.          0.          0.         -6.65278625 -1.5
+ -0.          0.          6.83172083  6.         -0.          0.        ]
 ~~~~
 
 ## Code
@@ -90,6 +95,7 @@ The state for the first agent looks like:
 The code is written in PyTorch 0.4 and Python 3.6.2.
 
 Main Files:  
+*TODO*
 
 + ./apps/Reacher.app : Contains the unity app. This app will simulate the Unity environment.
 + ddpq_agent.py: This code defines the ddpg agent.
@@ -98,6 +104,7 @@ Main Files:
 + ./cp folder: Contains the checkpoints of models of the successful agent.
 
 ## Learning Algorithm
+*TODO*
 
 We implement an artificial agent, termed [Deep Deterministic Policy Gradient](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)(DDPG)
 

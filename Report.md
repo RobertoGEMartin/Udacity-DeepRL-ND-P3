@@ -1,9 +1,9 @@
 [image1]: https://user-images.githubusercontent.com/10624937/43851024-320ba930-9aff-11e8-8493-ee547c6af349.gif "Trained Agent"
 [image2]: https://user-images.githubusercontent.com/10624937/43851646-d899bf20-9b00-11e8-858c-29b5c2c94ccc.png "Crawler"
 
-# Report: "Project " - Continous Control"
+# Report: "Project " - Collaboration and Competition - Multi-Agent RL"
 
-We will train a DeepRL agent to solve a Unity Environment.
+We will train a system of DeepRL agents to demonstrate collaboration or cooperation on a complex task.
 
 ## Architecture
 
@@ -18,9 +18,17 @@ We will train a DeepRL agent to solve a Unity Environment.
 
 
 + The next image defines the block diagram of ML-Agents toolkit for our sample environment. 
-+ In our project, we use 20 agent.
++ In our project, we use 2 agent.
 
 ![arch-unity-1.png](./img/arch-unity-1.png "arch-unity-1.png")
+
++ The next image defines the architecture of MADDPG 
+  
+![arch-unity-1.png](./img/MADDPG-Architecture-2.png "arch-MADDPG-2.png")
+
++ The next image overviews the flow of MADDPG 
+  
+![arch-unity-1.png](./img/MADDPG-Architecture-1.png "arch-MADDPG-1.png")
 
 ## Unity Environment
 
@@ -182,8 +190,9 @@ Future ideas for improving the agent's performance.
   + [Video HER: Vanilla DDPG vs DDPG video](https://www.youtube.com/watch?time_continue=130&v=Dz_HuzgMxzo )
 
 
+#### New References
+1. [Measuring collaborative emergent behavior in multi-agent reinforcement learning](https://www.researchgate.net/publication/326570321_Measuring_collaborative_emergent_behavior_in_multi-agent_reinforcement_learning)
 #### References
-
 1. [Udacity Gihub Repo](https://github.com/udacity/deep-reinforcement-learning)
 2. [Unity Docs](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/ML-Agents-Overview.md)
 3. [Unity Paper](https://arxiv.org/abs/1809.02627)

@@ -107,10 +107,9 @@ venv.bak/
 .ipynb_checkpoints/
 Reacher.app/
 test/
-apps/Crawler.app
-apps/Reacher.app
-apps/Reacher_20_agents.app
-
+apps/
+apps/Tennis.app
+apps/Tennis_Linux_NoVis
 
 #files
 *.mp4

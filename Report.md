@@ -9,7 +9,7 @@ We will train a system of DeepRL agents to demonstrate collaboration or cooperat
 
 + This image represents the flow of processes in a reinforcement learning training cycle.
 
-![arch-rl](./img/arch-rl.png "arch-rl")
+![arch-rl](./img/arch-rl-intel.png "arch-rl")
 
 
 + In this project, we use Unity like environment simulator engine and we use the PyTorch framework to build the deep RL agent.

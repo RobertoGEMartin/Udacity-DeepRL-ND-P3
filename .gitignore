@@ -113,4 +113,5 @@ apps/Tennis_Linux_NoVis
 
 #files
 *.mp4
+*.mov
 #*.gif

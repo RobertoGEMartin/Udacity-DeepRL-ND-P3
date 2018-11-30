@@ -149,7 +149,7 @@ You can see the details of conections between actor and critic in the next flowc
 INPUTS_UNITS = 512
 OUTPUTS_UNITS = 384
 BUFFER_SIZE = int(1e5)  # replay buffer size
-BATCH_SIZE = 128        # minibatch size
+BATCH_SIZE = 256        # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 3e-1              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
@@ -179,23 +179,41 @@ Critic NN:
 
 ### Training
 
-### Plot of Rewards
+We trained the agents with several values of BATCH_SIZE {64,128,256}
 
++ With batchs of 64, we stoped the training after 1050 episodes
++ With batchs of 128, we solved the env in 932 episodes.
++ With batchs of 256, we solver the env in 672 episodes.
+
+### Plot of Rewards
 Environment solved in 932 episodes!	Average Score: 0.50
 A plot of rewards per episode is included to illustrate that:
+![report-ddpg-agent.png - gif](./img/report-ddpg-agent-932.png "report-ddpg-agent.png")
 
-
-![report-ddpg-agent.png - gif](./img/report-ddpg-agent.png "report-ddpg-agent.png")
+Environment solved in 672 episodes!	Average Score: 0.51
+A plot of rewards per episode is included to illustrate that:
+![report-ddpg-agent.png - gif](./img/report-ddpg-agent-672.png "report-ddpg-agent.png")
 
 ### Watch The DDPG Agent in Action
 
-Video of trained DDPG Agent:
+Video of trained DDPG Agent with checkpoints:
 
-![Video of Training](./videos/trained-tennis-agents.gif "Video of Training")
++ cp_actor_cc_agent_932.pth
++ cp_critic_cc_agent_932.pth
+
+![Video of Training](./videos/trained-tennis-agents-932.gif "Video of Training")
 
 
 [youtube video](https://youtu.be/BdRdK2KzHQM)
 
+Video of trained DDPG Agent with checkpoints:
+
++ cp_actor_cc_agent_672.pth
++ cp_critic_cc_agent_672.pth
+
+![Video of Training](./videos/trained-tennis-agents-672.gif "Video of Training")
+
+[youtube video](https://youtu.be/tT1T2DkNKBM)
 
 ### Ideas for Future Work
 Future ideas for improving the agent's performance.

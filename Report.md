@@ -8,12 +8,12 @@ We will train a system of DeepRL agents to demonstrate collaboration or cooperat
 
 ## Architecture
 
-+ This image represents the flow of processes in a reinforcement learning training cycle.
++ This image shows the flow of processes in a reinforcement learning training cycle.
 
 ![arch-rl](./img/arch-rl-intel.png "arch-rl")
 
 
-+ In this project, we use Unity like environment simulator engine and we use the PyTorch framework to build the deep RL agent.
++ In this project, we use Unity like environment simulator engine and the PyTorch framework to build the deep RL agent.
 
 ![arch-deeprl-unity](./img/arch-deeprl-unity-2.png "arch-deeprl-unity")
 
@@ -85,8 +85,8 @@ Number of agents: 2
 Size of each action: 2
 There are 2 agents. Each observes a state with length: 24
 The state for the first agent looks like: [ 0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.          0.          0.
-  0.          0.          0.          0.         -6.65278625 -1.5
+  1.          0.          0.          0.          0.          0.
+  2.          0.          0.          0.         -6.65278625 -1.5
  -0.          0.          6.83172083  6.         -0.          0.        ]
 ~~~~
 
@@ -123,10 +123,14 @@ The Tennis Unity environment give us two agents to train.
 In our implementation, these agents will share the actor network and the critic network.
 These networks will be fully connected networks with the same inputs and outputs units.
 You can see the details of conections between actor and critic in the next flowchart.
-Details of implementation:
-+ We use tanh activation in actor network. (**TODO**)
-+ We use relu activation in critic network
+
+#### Details of implementation
+
++ We apply tanh activation to the output layer of actor network to bound the output between -1 and 1. Output layer has two units.
++ We apply relu activation to the output layer of critic network. Output layer has one unit.
 + Each agent uses the same actor network to take an action, sampled from a shared replay buffer.
++ Each agent uses the same critic network.
++ In the critic network, the action vector is added between the hidden layers.
 
 #### DDPG Flowchart
 ![ddpg-flow-graph](./img/ddpg-flow-graph.png "ddpg-flow-graph")
@@ -193,9 +197,8 @@ Video of trained DDPG Agent:
 
 
 ### Ideas for Future Work
-**TODO**
-
 Future ideas for improving the agent's performance.
++ Implement a real MADDPG where the actors and critics don't share NN.
 
 + Try new algorithms like PPO, A3C, and D4PG that use multiple (non-interacting, parallel) copies of the same agent to distribute the task of gathering experience
 
@@ -206,39 +209,15 @@ Future ideas for improving the agent's performance.
   + [Video HER: Vanilla DDPG vs DDPG video](https://www.youtube.com/watch?time_continue=130&v=Dz_HuzgMxzo )
 
 
-#### New References
-**TODO**
-
-1. [Measuring collaborative emergent behavior in multi-agent reinforcement learning](https://www.researchgate.net/publication/326570321_Measuring_collaborative_emergent_behavior_in_multi-agent_reinforcement_learning)
 #### References
-1. [Udacity Gihub Repo](https://github.com/udacity/deep-reinforcement-learning)
-2. [Unity Docs](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/ML-Agents-Overview.md)
-3. [Unity Paper](https://arxiv.org/abs/1809.02627)
-4. [OpenAI master RL](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)
-5. [DDPG paper](https://arxiv.org/abs/1509.02971)
-6. [OpenAI Baselines](https://blog.openai.com/better-exploration-with-parameter-noise/)
-7. [Book: Deep Reinforcement Learning Hands-On](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On)
-8. [PyTorch Agent Net: reinforcement learning toolkit for pytorch](https://github.com/Shmuma/ptan)
-9. [Reinforcement Learning Coach by Intel® AI Lab](https://nervanasystems.github.io/coach/)
-10. [RL Coach - DDPG - Docs](https://nervanasystems.github.io/coach/algorithms/policy_optimization/ddpg/)
-11. [RL Coach - DDPG - Code](https://github.com/NervanaSystems/coach/blob/master/rl_coach/agents/ddpg_agent.py)
-12. [Modularized Implementation of Deep RL Algorithms in PyTorch](https://github.com/ShangtongZhang/DeepRL)
-
-'''
-#######################################################################################
-References
-1. [Udacity Gihub Repo](https://github.com/udacity/deep-reinforcement-learning/tree/master/ddpg-pendulum)
-2. [Unity Docs](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/ML-Agents-Overview.md)
-3. [Unity Paper](https://arxiv.org/abs/1809.02627)
-4. [OpenAI master RL](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)
-5. [DDPG paper](https://arxiv.org/abs/1509.02971)
-6. [OpenAI Baselines](https://blog.openai.com/better-exploration-with-parameter-noise/)
-7. [Book: Deep Reinforcement Learning Hands-On](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On)
-8. [PyTorch Agent Net: reinforcement learning toolkit for pytorch](https://github.com/Shmuma/ptan)
-9. [Reinforcement Learning Coach by Intel® AI Lab](https://nervanasystems.github.io/coach/)
-10. [RL Coach - DDPG - Docs](https://nervanasystems.github.io/coach/algorithms/policy_optimization/ddpg/)
-11. [RL Coach - DDPG - Code](https://github.com/NervanaSystems/coach/blob/master/rl_coach/agents/ddpg_agent.py)
-12. [Modularized Implementation of Deep RL Algorithms in PyTorch](https://github.com/ShangtongZhang/DeepRL)
-
-#######################################################################################
-'''
++ [Udacity Gihub Repo](https://github.com/udacity/deep-reinforcement-learning)
++ [Unity Docs](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/ML-Agents-Overview.md)
++ [Unity Paper](https://arxiv.org/abs/1809.02627)
++ [OpenAI master RL](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)
++ [DDPG paper](https://arxiv.org/abs/1509.02971)
++ [OpenAI Baselines](https://blog.openai.com/better-exploration-with-parameter-noise/)
++ [Book: Deep Reinforcement Learning Hands-On](https://github.com/PacktPublishing/Deep-Reinforcement-Learning-Hands-On)
++ [Reinforcement Learning Coach by Intel® AI Lab](https://nervanasystems.github.io/coach/)
++ [RL Coach - DDPG - Docs](https://nervanasystems.github.io/coach/algorithms/policy_optimization/ddpg/)
++ [Modularized Implementation of Deep RL Algorithms in PyTorch](https://github.com/ShangtongZhang/DeepRL)
++ [Measuring collaborative emergent behavior in multi-agent reinforcement learning](https://www.researchgate.net/publication/326570321_Measuring_collaborative_emergent_behavior_in_multi-agent_reinforcement_learning)

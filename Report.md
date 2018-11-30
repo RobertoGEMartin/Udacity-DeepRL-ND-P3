@@ -216,8 +216,9 @@ Video of trained DDPG Agent with checkpoints:
 [youtube video](https://youtu.be/tT1T2DkNKBM)
 
 ### Ideas for Future Work
-Future ideas for improving the agent's performance.
-+ Implement a real MADDPG where the actors and critics don't share NN.
+Future ideas for improving the agents's performance.
+
++ Implement a real MADDPG where the actors and critics don't share weights.
 
 + Try new algorithms like PPO, A3C, and D4PG that use multiple (non-interacting, parallel) copies of the same agent to distribute the task of gathering experience
 

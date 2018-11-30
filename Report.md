@@ -183,7 +183,7 @@ We trained the agents with several values of BATCH_SIZE {64,128,256}
 
 + With batchs of 64, we stoped the training after 1050 episodes
 + With batchs of 128, we solved the env in 932 episodes.
-+ With batchs of 256, we solver the env in 672 episodes.
++ With batchs of 256, we solved the env in 672 episodes.
 
 ### Plot of Rewards
 Environment solved in 932 episodes!	Average Score: 0.50
@@ -194,24 +194,24 @@ Environment solved in 672 episodes!	Average Score: 0.51
 A plot of rewards per episode is included to illustrate that:
 ![report-ddpg-agent.png - gif](./img/report-ddpg-agent-672.png "report-ddpg-agent.png")
 
-### Watch The DDPG Agent in Action
+### Watch The DDPG agents in Action
 
-Video of trained DDPG Agent with checkpoints:
+Video of trained DDPG agents with checkpoints:
 
 + cp_actor_cc_agent_932.pth
 + cp_critic_cc_agent_932.pth
 
-![Video of Training](./videos/trained-tennis-agents-932.gif "Video of Training")
+![Video of Trained Agents](./videos/trained-tennis-agents-932.gif "Video of Training")
 
 
 [youtube video](https://youtu.be/BdRdK2KzHQM)
 
-Video of trained DDPG Agent with checkpoints:
+Video of trained DDPG agents with checkpoints:
 
 + cp_actor_cc_agent_672.pth
 + cp_critic_cc_agent_672.pth
 
-![Video of Training](./videos/trained-tennis-agents-672.gif "Video of Training")
+![Video of Trained Agents](./videos/trained-tennis-agents-672.gif "Video of Training")
 
 [youtube video](https://youtu.be/tT1T2DkNKBM)
 

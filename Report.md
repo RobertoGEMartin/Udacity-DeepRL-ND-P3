@@ -23,13 +23,13 @@ We will train a system of DeepRL agents to demonstrate collaboration or cooperat
 
 ![arch-unity-1.png](./img/arch-unity-1.png "arch-unity-1.png")
 
-+ The next image defines the architecture of MADDPG 
-  
-![arch-unity-1.png](./img/MADDPG-Architecture-2.png "arch-MADDPG-2.png")
-
-+ The next image overviews the flow of MADDPG 
++ The next image overviews the high level flow of a MADDPG architecture
   
 ![arch-unity-1.png](./img/MADDPG-Architecture-1.png "arch-MADDPG-1.png")
+
++ The next image overviews the low level flow of a MADDPG architecture 
+  
+![arch-unity-1.png](./img/MADDPG-Architecture-2.png "arch-MADDPG-2.png")
 
 ## Unity Environment
 
@@ -94,17 +94,15 @@ The state for the first agent looks like: [ 0.          0.          0.          
 
 The code is written in PyTorch 0.4 and Python 3.6.2.
 
-Main Files:  
-*TODO*
+Main Folders and files:  
 
-+ ./apps/* : Rhis folder contains the unity apps (headless ubuntu & mac). These apps will simulate the Unity environment.
++ ./apps/* : This folder should contain the unity apps (headless ubuntu and mac). These apps will simulate the Unity environment.
 + ddpq_agent.py: This file defines the DDPG agent.
 + model.py: This file defines the NN architecture [Actor and Critic].
 + Tennis_Rober.ipynb: This notebook will train the agent.
 + ./cp folder: This folder contains the checkpoints of trained agents: actor & critic.
 
 ## Learning Algorithm
-*TODO*
 
 We implement an artificial agent, termed [Deep Deterministic Policy Gradient](https://spinningup.openai.com/en/latest/algorithms/ddpg.html)(DDPG)
 
@@ -119,7 +117,18 @@ DDPG is a similarly foundational algorithm to VPG. DDPG is closely connected to 
 
 Algorithms like DDPG and Q-Learning are off-policy, so they are able to reuse old data very efficiently. They gain this benefit by exploiting Bellman’s equations for optimality, which a Q-function can be trained to satisfy using any environment interaction data (as long as there’s enough experience from the high-reward areas in the environment).
 
-### DDPG Flowchart
+### Implemtation
+
+The Tennis Unity environment give us two agents to train.
+In our implementation, these agents will share the actor network and the critic network.
+These networks will be fully connected networks with the same inputs and outputs units.
+You can see the details of conections between actor and critic in the next flowchart.
+Details of implementation:
++ We use tanh activation in actor network. (**TODO**)
++ We use relu activation in critic network
++ Each agent uses the same actor network to take an action, sampled from a shared replay buffer.
+
+#### DDPG Flowchart
 ![ddpg-flow-graph](./img/ddpg-flow-graph.png "ddpg-flow-graph")
 + Ref: https://nervanasystems.github.io/coach/algorithms/policy_optimization/ddpg/
 
@@ -131,33 +140,36 @@ Algorithms like DDPG and Q-Learning are off-policy, so they are able to reuse ol
 ### Hyper Parameters
 #### DDPG Parameters
 
-+ BUFFER_SIZE = int(1e6)        # replay buffer size
-+ BATCH_SIZE = 1024             # minibatch size
-+ GAMMA = 0.99                  # discount factor
-+ TAU = 1e-3                    # for soft update of target parameters
-+ LR_ACTOR = 1e-3               # learning rate of the actor 
-+ LR_CRITIC = 1e-3              # learning rate of the critic before: 3e-4
-+ WEIGHT_DECAY = 0.0000         # L2 weight decay
-+ EPSILON = 1.0                 # noise factor
-+ EPSILON_DECAY = 1e-6          # decay of noise factor
+~~~~
+INPUTS_UNITS = 512
+OUTPUTS_UNITS = 384
+BUFFER_SIZE = int(1e5)  # replay buffer size
+BATCH_SIZE = 128        # minibatch size
+GAMMA = 0.99            # discount factor
+TAU = 3e-1              # for soft update of target parameters
+LR_ACTOR = 1e-4         # learning rate of the actor 
+LR_CRITIC = 1e-4        # learning rate of the critic
+WEIGHT_DECAY = 0        # L2 weight decay
+~~~~~
 
 #### Neural Network. Model Architecture & Parameters
 For this project we use these models:
 
 ~~~~
-Actor Model:
-  (bn0): BatchNorm1d(33, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-  (fc1): Linear(in_features=33, out_features=128, bias=True)
-  (bn1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-  (fc2): Linear(in_features=128, out_features=128, bias=True)
-  (bn2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-  (fc3): Linear(in_features=128, out_features=4, bias=True)
-
-Critic Model:
-  (bn0): BatchNorm1d(33, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-  (fcs1): Linear(in_features=33, out_features=128, bias=True)
-  (fc2): Linear(in_features=132, out_features=128, bias=True)
-  (fc3): Linear(in_features=128, out_features=1, bias=True)
+Actor NN: 
+-----------
+ Actor(
+  (fc1): Linear(in_features=24, out_features=512, bias=True)
+  (fc2): Linear(in_features=512, out_features=384, bias=True)
+  (fc3): Linear(in_features=384, out_features=2, bias=True)
+)
+Critic NN: 
+-----------
+ Critic(
+  (fcs1): Linear(in_features=24, out_features=512, bias=True)
+  (fc2): Linear(in_features=514, out_features=384, bias=True)
+  (fc3): Linear(in_features=384, out_features=1, bias=True)
+)
 ~~~~
 
 ### Training
@@ -174,7 +186,7 @@ A plot of rewards per episode is included to illustrate that:
 
 Video of trained DDPG Agent:
 
-![Video of Training](./videos/ddpg-agent-11.14.2018.gif "Video of Training")
+![Video of Training](./videos/trained-tennis-agents.gif "Video of Training")
 
 
 [youtube video](https://youtu.be/BdRdK2KzHQM)
@@ -195,6 +207,8 @@ Future ideas for improving the agent's performance.
 
 
 #### New References
+**TODO**
+
 1. [Measuring collaborative emergent behavior in multi-agent reinforcement learning](https://www.researchgate.net/publication/326570321_Measuring_collaborative_emergent_behavior_in_multi-agent_reinforcement_learning)
 #### References
 1. [Udacity Gihub Repo](https://github.com/udacity/deep-reinforcement-learning)

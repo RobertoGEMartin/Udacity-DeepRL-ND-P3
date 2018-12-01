@@ -179,11 +179,13 @@ Critic NN:
 
 ### Training
 
-We trained the agents with several values of BATCH_SIZE {64,128,256}
+We trained the agents with several values of BATCH_SIZE {64,128,256},1024}
 
-+ With batchs of 64, we stoped the training after 1050 episodes
-+ With batchs of 128, we solved the env in 932 episodes.
-+ With batchs of 256, we solved the env in 672 episodes.
++ With batches of 64, the agents don't learn.
++ With batches of 128, we solved the env in 932 episodes.
++ With batches of 256, we solved the env in 672 episodes.
++ With batches of 1024, we stoped the training after 1050 episodes, because the average score started to decrease after to get 0.4 value.
+
 
 ### Plot of Rewards
 Environment solved in 932 episodes!	Average Score: 0.50

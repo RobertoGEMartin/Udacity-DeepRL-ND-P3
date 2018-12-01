@@ -3,6 +3,7 @@
 [image2]: https://user-images.githubusercontent.com/10624937/42135622-e55fb586-7d12-11e8-8a54-3c31da15a90a.gif "Soccer"
 
 # Report
+
 # "Project  - Collaboration and Competition"
 
 We will train a system of DeepRL agents to demonstrate collaboration or cooperation on a complex task.
@@ -158,6 +159,7 @@ WEIGHT_DECAY = 0        # L2 weight decay
 ~~~~~
 
 #### Neural Network. Model Architecture & Parameters
+git 
 For this project we use these models:
 
 ~~~~

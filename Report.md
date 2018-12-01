@@ -63,7 +63,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 
 ~~~~
-INFO:unityagents:
+INFO:unity-agents:
 'Academy' started successfully!
 Unity Academy name: Academy
         Number of Brains: 1
@@ -118,12 +118,12 @@ DDPG is a similarly foundational algorithm to VPG. DDPG is closely connected to 
 
 Algorithms like DDPG and Q-Learning are off-policy, so they are able to reuse old data very efficiently. They gain this benefit by exploiting Bellman’s equations for optimality, which a Q-function can be trained to satisfy using any environment interaction data (as long as there’s enough experience from the high-reward areas in the environment).
 
-### Implemtation
+### Implementation
 
 The Tennis Unity environment give us two agents to train.
 In our implementation, these agents will share the actor network and the critic network.
 These networks will be fully connected networks with the same inputs and outputs units.
-You can see the details of conections between actor and critic in the next flowchart.
+You can see the details of connections between actor and critic in the next flowchart.
 
 #### Details of implementation
 
@@ -149,7 +149,7 @@ You can see the details of conections between actor and critic in the next flowc
 INPUTS_UNITS = 512
 OUTPUTS_UNITS = 384
 BUFFER_SIZE = int(1e5)  # replay buffer size
-BATCH_SIZE = 256        # minibatch size
+BATCH_SIZE = 256        # mini-batch size
 GAMMA = 0.99            # discount factor
 TAU = 3e-1              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
@@ -184,7 +184,7 @@ We trained the agents with several values of BATCH_SIZE {64,128,256},1024}
 + With batches of 64, the agents don't learn.
 + With batches of 128, we solved the env in 932 episodes.
 + With batches of 256, we solved the env in 672 episodes.
-+ With batches of 1024, we stoped the training after 1050 episodes, because the average score started to decrease after to get 0.4 value.
++ With batches of 1024, we stopped the training after 1050 episodes, because the average score started to decrease after to get 0.4 value.
 
 
 ### Plot of Rewards

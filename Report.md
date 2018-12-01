@@ -245,3 +245,6 @@ Future ideas for improving the agents's performance.
 + [RL Coach - DDPG - Docs](https://nervanasystems.github.io/coach/algorithms/policy_optimization/ddpg/)
 + [Modularized Implementation of Deep RL Algorithms in PyTorch](https://github.com/ShangtongZhang/DeepRL)
 + [Measuring collaborative emergent behavior in multi-agent reinforcement learning](https://www.researchgate.net/publication/326570321_Measuring_collaborative_emergent_behavior_in_multi-agent_reinforcement_learning)
+
+--------------------------------
+By Roberto Gómez-Espinosa Martín
